@@ -12,10 +12,68 @@
   "activationEvents": [],
   "main": "./dist/extension.js",
   "contributes": {
+    
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "gitnote",
+          "title": "GitNote",
+          "icon": "resources/icon.png"
+        }
+      ]
+    },
+    
+    "views": {
+      "gitnote": [
+        {
+          "id": "gitnote-welcome",
+          "name": "Loooooking for .git folder",
+          "when": "gitnote.initialized === false"
+        },
+        {
+          "id": "gitnote-NotesToMe",
+          "name": "Notes To Me",
+          "icon": "resources/icon.png",
+          "when": "gitnote.initialized"
+        },
+        {
+          "id": "gitnote-NotesFromMe", 
+          "name": "Notes From Me",
+          "icon": "resources/icon.png",
+          "when": "gitnote.initialized"
+        }
+      ]
+    },
+    
+    
+    "viewsWelcome": [
+      {
+        "view": "gitnote-welcome",
+          "contents": "GitNote uses the “.git” folder to view notes, but it seems unable to locate the “.git” folder.\n[GitNote'u Başlat](command:gitnote.initialize)",
+        "when": "!gitnote.initialized"
+      }
+    ],
+    
+
     "commands": [
       {
         "command": "gitnote.helloWorld",
         "title": "Hello World"
+      },
+      {
+        "command": "gitnote.createNote",
+        "title": "Create Note",
+        "icon": "$(add)"
+      },
+      {
+        "command": "gitnote.showMyNotes",
+        "title": "Show My Notes",
+        "icon": "$(list-unordered)"
+      },
+      {
+        "command": "gitnote.initialize",
+        "title": "Initialize GitNote",
+        "icon": "$(rocket)"
       }
     ]
   },
